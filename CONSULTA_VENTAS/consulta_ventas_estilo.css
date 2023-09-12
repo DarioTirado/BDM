@@ -1,0 +1,26 @@
+.articulos_agregados{
+
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.card{
+    background-color: rgb(247, 247, 247);
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+.titulo2{
+
+   text-align: center;
+}
+
+.titulo{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+
+
+

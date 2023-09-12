@@ -1,0 +1,64 @@
+
+
+
+
+.vertical-cards {
+    display: block;
+    clear: both; /* Esto asegura que las cartas estén completamente debajo de las demás */
+}
+
+.articulos{
+
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+
+.card{
+background-color: rgb(247, 247, 247);
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.btn-primary{
+background-color: rgb(243, 43, 70);
+
+}
+
+.titulo{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.BTN_PAGAR{
+text-align: center;
+    display: block;
+    width: 200px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    background-color: rgb(66, 122, 196);
+    border-radius: 10px;
+    padding: 15px 30px;
+    margin: 150px 130px;
+    color: aliceblue;
+    cursor: pointer;
+    position: absolute;
+    top: 10px; /* Coloca el elemento en la parte superior del contenedor/página */
+    right: 10px;
+
+}
+
+@media (max-width: 768px) {
+    .BTN_PAGAR {
+        top: 80%; /* Ajuste para pantallas más pequeñas */
+        right: 5px; /* Ajuste para pantallas más pequeñas */
+    }
+}
+
+.BTN_PAGAR:hover{
+
+    background-color: transparent;
+    border: 2px solid rgb(127, 206, 255);
+    color:  rgb(127, 206, 255);
+}
