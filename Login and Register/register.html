@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Register </title>
+    <link rel="stylesheet" href="style.css">
+    <link href='ttps://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <form action="">
+            <h1 >Register</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Name" required>
+                <i class='bx bxs-user'></i>
+
+            </div>
+            <div class="input-box">
+                <input type="text" placeholder="Username" required>
+                <i class='bx bxs-user'></i>
+                <div id="username-message" class="username-message"></div>
+
+
+            </div>
+            <script>
+            document.getElementById('username').addEventListener('input', function () {
+                var username = this.value;
+                var usernameMessage = document.getElementById('username-message');
+                
+                if (username.length >= 3) {
+                    usernameMessage.innerHTML = '';
+                } else {
+                    usernameMessage.innerHTML = 'El nombre de usuario debe tener al menos tres caracteres.';
+                }
+            });
+            </script>
+
+            <div class="input-box">
+                <input type="email" placeholder="Email" required>
+                <i class='bx bxs-user'></i>
+
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Password" required>
+                <i class="'bx bxs-lock-alt"></i>
+                <div id="password-message" class="password-message"></div>
+
+            </div>
+            <script>
+                document.getElementById('password').addEventListener('input', function () {
+                    var password = this.value;
+                    var passwordMessage = document.getElementById('password-message');
+                    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[\S]{8,}$");
+                    
+                    if (strongRegex.test(password)) {
+                        passwordMessage.innerHTML = '';
+                    } else {
+                        passwordMessage.innerHTML = 'La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.';
+                    }
+                });
+            </script>
+            <div class="lowerBox">
+                <p>Rol</p>
+                <div>
+                    <label for="customer">Customer</label>
+                    <input type="radio" id="customer" name="role" value="customer">
+                    
+                    <label for="seller">Seller</label>
+                    <input type="radio" id="seller" name="role" value="seller">
+                </div>
+                <p>Foto de perfil</p>
+                <div>
+                    
+                    <input type="file" id="fileInput" name="fileInput">
+                </div>
+                <p>Fecha de Nacimeinto</p>
+                <div>
+                    
+                    <input type="date" id="birthdate" name="birthdate">
+                </div>
+                
+                <p>Sexo</p>
+                <div class="Sexo">
+                    
+                    <input type="radio" id="male" name="gender" value="masculino">
+                    <label for="male">Masculino</label>
+                    
+                    <input type="radio" id="female" name="gender" value="femenino">
+                    <label for="female">Femenino</label>
+                    
+                    <input type="radio" id="other" name="gender" value="otro">
+                    <label for="other">Otro</label>
+                </div>
+              
+            </div>
+
+
+            <button type="submit" class="btn">Register</button>
+            <div class="register-link">
+                <p>Already have an account? <a href="index.html">Login</a></p>
+            </div>
+        </form>
+
+    </div>
+
+</body>
+</html>
