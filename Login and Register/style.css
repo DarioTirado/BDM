@@ -123,3 +123,78 @@ body{
 .wrapper .lowerBox{
     width: 420px;
 }
+
+
+/*Registro*/
+
+.roles{
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    display: block;
+}
+
+.date{
+
+    width: 40%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.subirfoto{
+    background-color: rgb(66, 122, 196);
+    color: #fff;
+    padding: 0px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+ display: inline-block;
+ 
+ 
+}
+
+.texto_foto{
+    position: absolute;
+justify-content: center;
+left: 170px;
+
+}
+
+.subirfoto:hover {
+    background-color: transparent;
+    border: 2px solid rgb(127, 206, 255);
+    color:  rgb(127, 206, 255);
+    
+}
+
+.subirfoto input[type="file"]{
+    
+opacity: 0%;
+
+}
+
+.subirfoto2{
+    background-color: rgb(66, 122, 196);
+    color: #fff;
+    padding: 20px 80px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-align: center;
+ display: inline-block;
+ left: 65px;
+ position: relative;
+ 
+}
+
+.subirfoto2:hover {
+    background-color: transparent;
+    border: 2px solid rgb(127, 206, 255);
+    color:  rgb(127, 206, 255);
+    
+}

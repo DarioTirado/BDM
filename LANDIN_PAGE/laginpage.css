@@ -1,0 +1,18 @@
+/* Agrega este CSS a tu archivo de estilos o en la sección <style> de tu documento HTML */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Esto centra el contenido verticalmente en toda la ventana */
+}
+
+.img-fluid{
+    max-width: 30%;
+    height: auto;
+}
+
+h1, .btn-primary {
+    text-align: center;
+    margin: 20px 0; /* Ajusta la separación entre cada elemento según tus preferencias */
+}
