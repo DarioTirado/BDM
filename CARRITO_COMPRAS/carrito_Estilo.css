@@ -1,64 +1,79 @@
-
-
-
-
-.vertical-cards {
-    display: block;
-    clear: both; /* Esto asegura que las cartas estén completamente debajo de las demás */
-}
-
-.articulos{
-
+.articulos {
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-}
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .horizontal-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .card {
+    flex: 0 0 calc(50% - 10px); /* Controla el ancho de cada tarjeta (50% del ancho del contenedor con espacio entre ellas) */
+    margin: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    max-width: 250px; /* Ajusta el ancho máximo de la tarjeta */
 
-
-.card{
-background-color: rgb(247, 247, 247);
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.btn-primary{
-background-color: rgb(243, 43, 70);
-
-}
-
+  }
+  
+  .card-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+  }
+  
+  .card-img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    margin: 10px 0; /* Añade espacio vertical entre el título y el texto */
+  }
+  
+  .card-text {
+    font-size: 14px;
+    margin: 10px 0; /* Añade espacio vertical entre el texto y el botón */
+  }
+  
+  .card-footer {
+    margin-top: 10px;
+  }
+  
+  .btn-primary {
+    background-color: #0074d9;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  
 .titulo{
     margin-bottom: 10px;
     margin-left: 10px;
 }
 
-.BTN_PAGAR{
-text-align: center;
-    display: block;
-    width: 200px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
-    background-color: rgb(66, 122, 196);
+.BTN_PAGAR {
+    text-align: center;
+    margin-top: 20px; /* Añade un espacio entre las tarjetas y el botón de Pagar */
+  }
+  
+.BTN_PAGAR a {
     border-radius: 10px;
-    padding: 15px 30px;
-    margin: 150px 130px;
-    color: aliceblue;
+    background-color: #0074d9;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
     cursor: pointer;
-    position: absolute;
-    top: 10px; /* Coloca el elemento en la parte superior del contenedor/página */
-    right: 10px;
-
-}
-
-@media (max-width: 768px) {
-    .BTN_PAGAR {
-        top: 80%; /* Ajuste para pantallas más pequeñas */
-        right: 5px; /* Ajuste para pantallas más pequeñas */
-    }
-}
-
-.BTN_PAGAR:hover{
-
-    background-color: transparent;
-    border: 2px solid rgb(127, 206, 255);
-    color:  rgb(127, 206, 255);
-}
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  
+  
