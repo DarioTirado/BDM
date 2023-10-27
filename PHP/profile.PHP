@@ -25,6 +25,17 @@ if($rol == 2){
 if($rol == 3){
   $ROL = "VENDEDOR";
 }
+
+
+
+
+$query2="SELECT ID_CATEGORIA, NOMBRE FROM categoria";
+$resultcat = mysqli_query($conn, $query2);
+if (!$resultcat) {
+  echo "Error en la consulta: " . mysqli_error($conn);
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -40,10 +51,12 @@ if($rol == 3){
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
     <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../Login_and_Register/profile_style.css" />
   </head>
   <body>
-    <div class="header__wrapper">
+
+  <div class="header__wrapper">
       <header></header>
       <div class="cols__container">
         <div class="left__col">
@@ -86,7 +99,7 @@ if($rol == 3){
               <li><a href="">Productos</a></li>
               <li><a href="">Reseñas</a></li>
             </ul>
-            <button>Seguir</button>
+            <button onclick="openModal()" >Crear Producto</button>
           </nav>
 
           <div class="photos">
@@ -100,5 +113,34 @@ if($rol == 3){
         </div>
       </div>
     </div>
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal" id="myModal">
+        <form action="../PHP/REGISTRO_PRODUCTO.php" method="post">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Crear Producto</h2>
+            <input class="form-control me-2" type="text" placeholder="Nombre" name="nombreprod" required><br>
+            <input class="form-control me-2" type="text" placeholder="Descripcion" name="descripcion" required><br>
+            <input class="form-control me-2" type="text" placeholder="Cantidad" name="cantidad" required><br>
+            <input class="form-control me-2" type="text" placeholder="Precio" name="precio" required><br>
+            <label for="">Seleccione Una Categoria</label>
+            <select class="select-style" name="my_select2">
+              <?php
+              while ($filacat = mysqli_fetch_assoc($resultcat))  {
+                echo '<option value="' . $filacat['ID_CATEGORIA'] . '">' . $filacat['NOMBRE'] . '</option>';
+              }
+                ?>    
+           </select>        
+            <p>Cargar Imagenes</p>
+            <input class="form-control me-2" type="file" placeholder="Imagenes" name="img"><br>
+            <p>Cargar Video</p>
+            <input class="form-control me-2" type="file" placeholder="Videos" name="vid"><br>
+            <input class="btnenviar"  type="submit">
+        </form>
+    </div>
+
+
+    <script src="../JAVASCRIPT/Crear_producto.js"></script>
   </body>
 </html>
