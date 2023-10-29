@@ -14,7 +14,7 @@
 <body>
 
     <div class="wrapper">
-        <form method="POST" action="../PHP/LOGIN.php">
+        <form method="POST" action="../PHP/LOGIN.php" enctype="multipart/form-data">
             <h1 >Register</h1>
             <div class="input-box">
                 <input type="text" placeholder="Name" name="nombre" required>
@@ -61,7 +61,7 @@
                 <p><b>Foto De Perfil</b></p>
                 <div class="subirfoto">
                     <p class="texto_foto">Subir Archivo</p>
-                    <input type="file" id="fileInput" name="fileInput">
+                    <input type="file" id="fileInput" name="image">
                 </div>
                 <br>
 
@@ -89,7 +89,7 @@
             </div>
 
 
-            <input class="subirfoto2" type="submit" value="Log In">
+            <input class="subirfoto2" type="submit" value="Register" >
             <div class="register-link">
                 <p>Already have an account? <a href="index.html">Login</a></p>
             </div>

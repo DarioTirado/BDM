@@ -29,12 +29,16 @@
                             Consultas
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/CARRITO_COMPRAS/Carrito.html">Carrito</a></li>
-                            <li><a class="dropdown-item" href="/CONSULTA_PEDIDOS/CONSULTA_PEDIDOS.html">Consulta De Pedidos</a></li>
+                            <li><a class="dropdown-item" href="../CARRITO_COMPRAS/Carrito.html">Carrito</a></li>
+                            <li><a class="dropdown-item" href="../CONSULTA_PEDIDOS/CONSULTA_PEDIDOS.html">Consulta De Pedidos</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/CONSULTA_VENTAS/Consulta_ventas.html">Consulta De Ventas</a></li>
+                            <li><a class="dropdown-item" href="../CONSULTA_VENTAS/Consulta_ventas.html">Consulta De Ventas</a></li>
                         </ul>
                     </li>
+                        <li>
+                            <a class="nav-link" onclick="openModal()">Crear Categoria</a>
+                        </li>
+
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -43,6 +47,18 @@
             </div>
         </div>
     </nav>
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal" id="myModal">
+        <form action="../PHP/REGISTRO_CATEGORIA.php" method="post">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Crear Categoria</h2>
+            <input class="form-control me-2" type="text" placeholder="Nombre" name="nombrecat">
+            <input class="btnenviar"  type="submit">
+        </form>
+    </div>
+
 
     <div class="header__wrapper">
         <header></header>

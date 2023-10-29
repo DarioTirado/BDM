@@ -14,6 +14,7 @@ while($mostrar=mysqli_fetch_array($result)){
   $nombre = $mostrar['NOMBRE_USUARIO'];
   $rol = $mostrar['ROL'];
   $correo = $mostrar['CORREO'];
+  $imagen = $mostrar['IMAGEN'];
 }
 
 if($rol == 1){
@@ -61,7 +62,7 @@ if (!$resultcat) {
       <div class="cols__container">
         <div class="left__col">
           <div class="img__container">
-            <img src="../Login_and_Register/Images/pato.jpg" alt="Usuario" />
+          <?php echo '<img src="' . $imagen . '" alt="Usuario">'; ?>
             <span></span>
           </div>
           <h2><?php echo $nombre; ?></h2>
@@ -117,7 +118,7 @@ if (!$resultcat) {
     <div class="modal-overlay" id="modalOverlay"></div>
 
     <div class="modal" id="myModal">
-        <form action="../PHP/REGISTRO_PRODUCTO.php" method="post">
+        <form action="../PHP/REGISTRO_PRODUCTO.php" method="post" enctype="multipart/form-data">>
             <span class="close-button" onclick="closeModal()">&times;</span>
             <h2>Crear Producto</h2>
             <input class="form-control me-2" type="text" placeholder="Nombre" name="nombreprod" required><br>
@@ -133,10 +134,10 @@ if (!$resultcat) {
                 ?>    
            </select>        
             <p>Cargar Imagenes</p>
-            <input class="form-control me-2" type="file" placeholder="Imagenes" name="img"><br>
+            <input class="form-control me-2" type="file" multiple placeholder="Imagenes" name="imgProducto[]"><br>
             <p>Cargar Video</p>
-            <input class="form-control me-2" type="file" placeholder="Videos" name="vid"><br>
-            <input class="btnenviar"  type="submit">
+            <input class="form-control me-2" type="file" placeholder="Videos" name="vidproducto"><br>
+            <input class="btnenviar" name="submit" type="submit">
         </form>
     </div>
 
