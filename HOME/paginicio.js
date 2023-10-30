@@ -83,3 +83,55 @@ window.onload = function() {
         alert(successMessage);
     }
 }
+
+$(document).ready(function () {
+    //Display de la tabla
+    const action = "busquedatal";
+    var datacontact = "";
+    $.ajax({
+      url: "../PHP/OBTENER_PRODUCTOS.php",
+      type: "POST",
+      async: true,
+      data: {
+        action_c: action,
+      },
+      beforeSend: function () { },
+      success: function (response) {
+        //console.log(response);
+  
+        if (response == "notData") {
+          alert("Ups! Aguarda Al futuro de la Educacion");
+        } else {
+          const info = JSON.parse(response);
+          //console.log(info);
+          datacontact = info;
+          jsonLength = datacontact.length;
+          for (let i = 0; i < jsonLength; i++) {
+            var html = "";
+
+        
+        html +=  `   <div class="row">`;
+        html +=  `        <div class="col-md-4">`;
+        html +=  `            <div class="card mb-4">`;
+        html +=  `                <img src="" class="card-img-top" alt="Producto 1">`;
+        html +=  `                <div class="card-body">`;
+        html +=  `                    <h5 class="card-title">`+ datacontact[i].NOMBRE +`</h5>`;
+        html +=  `                    <p class="card-text">Precio:` + datacontact[i].PRECIO + `</p>`;
+        html +=  `                    <p class="card-text">Precio:` + datacontact[i].DESCRIPCION + `</p>`;
+        html +=  `                    <a href="#" class="btn btn-primary">Ver Producto</a>`;
+        html +=  `                </div>`;
+        html +=  `            </div>`;
+        html +=  `        </div>`;
+        
+ 
+            //console.log(i);
+            $("#list-container").append(html);
+          }
+  
+        }
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  });
