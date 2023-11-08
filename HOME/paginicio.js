@@ -110,21 +110,25 @@ $(document).ready(function () {
             var html = "";
 
         
-        html +=  `   <div class="row">`;
+    
         html +=  `        <div class="col-md-4">`;
         html +=  `            <div class="card mb-4">`;
-        html +=  `                <img src="" class="card-img-top" alt="Producto 1">`;
         html +=  `                <div class="card-body">`;
-        html +=  `                    <h5 class="card-title">`+ datacontact[i].NOMBRE +`</h5>`;
-        html +=  `                    <p class="card-text">Precio:` + datacontact[i].PRECIO + `</p>`;
-        html +=  `                    <p class="card-text">Precio:` + datacontact[i].DESCRIPCION + `</p>`;
-        html +=  `                    <a href="#" class="btn btn-primary">Ver Producto</a>`;
+        html +=  `                   <form method="POST" action="../PHP/INFO_PRODUCTO.php" enctype="multipart/form-data">`;
+        html +=  `                    <h5 name="nombre" class="card-title">`+ datacontact[i].NOMBRE +`</h5>`;
+        html +=  `                    <p name="precio" class="card-text">Precio: ` + datacontact[i].PRECIO + `$</p>`;
+        html +=  `                    <p name="descripcion" class="card-text">Descripcion: ` + datacontact[i].DESCRIPCION + `</p>`;
+        html +=  `                    <p name="" class="card-text">id: ` + datacontact[i].ID_PRODUCTO + `</p>`;
+        html +=  `                    <input name="id" type="hidden" value="` + datacontact[i].ID_PRODUCTO + `">`;
+        html +=  `                    <input type="submit" class="btn btn-primary">`;
+        html +=  `                    <a href="#" class="btn btn-primary">Agregar A Carrito</a>`;
+        html +=  `                      </form>`;
         html +=  `                </div>`;
         html +=  `            </div>`;
         html +=  `        </div>`;
+     
         
- 
-            //console.log(i);
+         
             $("#list-container").append(html);
           }
   
@@ -135,3 +139,5 @@ $(document).ready(function () {
       },
     });
   });
+
+

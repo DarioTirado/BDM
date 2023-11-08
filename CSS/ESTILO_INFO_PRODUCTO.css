@@ -1,0 +1,11 @@
+.IMG{
+    max-width: 30%; /* Establece un ancho máximo del 100% del contenedor */
+    height: auto;
+    margin: 9px ;
+   
+}
+
+.img-container{
+    display: flex;
+    justify-content: center;
+}
