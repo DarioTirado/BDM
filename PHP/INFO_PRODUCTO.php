@@ -7,13 +7,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Accede al valor del ID del producto
         $id = $_POST['id'];
     
-    echo "El ID del producto seleccionado es: " . $id;
+ //   echo "El ID del producto seleccionado es: " . $id;
 } else {
     echo "El campo 'id' no se encontró en el formulario.";
 }
 } else {
 echo "La solicitud no fue realizada por el método POST.";
 }
+
+
+
+
+    $query = "SELECT NOMBRE, DESCRIPCION, PRECIO, VALORACION, CANTIDAD,FK_CATEGORIA FROM productos WHERE ID_PRODUCTO = '$id'";
+    $result = mysqli_query($conn, $query);
+    while($mostrar=mysqli_fetch_array($result)){
+        $nombre = $mostrar['NOMBRE'];
+        $descripcion = $mostrar['DESCRIPCION'];
+        $precio = $mostrar['PRECIO'];
+        $valoracion = $mostrar['VALORACION'];
+        $cantidad = $mostrar['CANTIDAD'];
+        $categoria = $mostrar['FK_CATEGORIA'];
+      }
+
+
+      $query2 = "SELECT NOMBRE FROM categoria WHERE ID_CATEGORIA = '$categoria'";
+      $result2 = mysqli_query($conn, $query);
+      while($mostrar=mysqli_fetch_array($result2)){
+          $nombrecat = $mostrar['NOMBRE'];
+          
+        }
+
+        /*
+      $query3 = "SELECT RUTA_IMAGEN FROM imagenes WHERE ID_PRODUCTO = '$id'";
+      $result3 = mysqli_query($conn, $query3);
+      while($mostrar=mysqli_fetch_array($result3)){
+          $imagen1 = $mostrar['RUTA_IMAGEN'];
+     
+        }*/
 
 
 ?>
@@ -78,18 +108,23 @@ echo "La solicitud no fue realizada por el método POST.";
 <div class="card">
 </div>
   <div class="img-container">
-  <img class="IMG" src="../ZRECURSOS/IMAGENES_PRODUCTOS/_b5fa45c0-f4d8-4d66-bb8b-4273303de166.jpg" class="card-img-bottom" alt="...">
-  <img class="IMG" src="../ZRECURSOS/IMAGENES_PRODUCTOS/_b5fa45c0-f4d8-4d66-bb8b-4273303de166.jpg" class="card-img-bottom" alt="...">
-  <img class="IMG" src="../ZRECURSOS/IMAGENES_PRODUCTOS/_b5fa45c0-f4d8-4d66-bb8b-4273303de166.jpg" class="card-img-bottom" alt="...">
+  <?php   $query3 = "SELECT RUTA_IMAGEN FROM imagenes WHERE ID_PRODUCTO = '$id'";
+      $result3 = mysqli_query($conn, $query3);
+      while($mostrar=mysqli_fetch_array($result3)){
+          $imagen1 = $mostrar['RUTA_IMAGEN'];
+          echo '<img  class="IMG" src="' . $imagen1 . '"> ';
+
+        }
+        ?>
 </div>
 
   <div class="card-body">
     <h5 class="card-title"></h5>
-    <p class="card-text">Descripcion De El Articulo: <?php echo $id; ?></p>
-    <p class="card-text">Puntuacion:</p>
-    <p class="card-text">Precio: </p>
-    <p class="card-text">Cantidad:</p>
-    <p class="card-text"><small class="text-muted">Categoria</small></p>
+    <p class="card-text">Descripcion De El Articulo: <?php echo $nombre; ?></p>
+    <p class="card-text">Puntuacion: <?php echo $valoracion; ?></p>
+    <p class="card-text">Precio: <?php echo $precio; ?></p>
+    <p class="card-text">Cantidad: <?php echo $cantidad; ?></p>
+    <p class="card-text"><small class="text-muted">Categoria: <?php echo $nombrecat; ?></small></p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
