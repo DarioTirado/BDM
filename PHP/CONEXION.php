@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "bdm";
+$dbname = "bdm3";
 
 date_default_timezone_set("America/Mexico_City");
 
