@@ -9,3 +9,19 @@
     display: flex;
     justify-content: center;
 }
+
+.video-container {
+    width: 60%; /* Ancho del div de video */
+    float: left; /* Hace que los elementos floten a la izquierda */
+}
+
+/* Estilo para el reproductor de video */
+.video {
+    width: 100%; /* Ajustar el video al ancho del contenedor */
+    height: auto; /* Mantener la proporción del video */
+}
+
+.info-container {
+    width: 40%; /* Ancho del div de información */
+    float: left; /* Hace que los elementos floten a la izquierda */
+}

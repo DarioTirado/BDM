@@ -19,15 +19,20 @@ $cantidad = $_POST["cantidad"] ?? null;
 $cantidad_vendidos = 0;
 $valoracion = "SIN VALORACION";
 $estado=1;
+$directorioDestino = '../ZRECURSOS/VIDEOS';
+
+$rutaArchivo = $directorioDestino . '/' . $_FILES['vidproducto']['name'];
+move_uploaded_file($_FILES['vidproducto']['tmp_name'], $rutaArchivo);
+
 
 if(isset($_POST['my_select2'])) {
     $fk_categoria = $_POST['my_select2'];
   
 }
 
-$sql = "INSERT INTO productos (NOMBRE, DESCRIPCION, FK_IMAGENES, FK_CATEGORIA, PRECIO, CANTIDAD, VALORACION, ESTADO, CANTIDAD_VENDIDOS, FK_COMENTARIOS, ID_USUARIO)
+$sql = "INSERT INTO productos (NOMBRE, DESCRIPCION, FK_IMAGENES, VIDEO ,FK_CATEGORIA, PRECIO, CANTIDAD, VALORACION, ESTADO, CANTIDAD_VENDIDOS, FK_COMENTARIOS, ID_USUARIO)
 
-VALUES ('$nombre','$descripcion',NULL,'$fk_categoria','$precio','$cantidad','$valoracion','$estado','$cantidad_vendidos',NULL,'$id')";
+VALUES ('$nombre','$descripcion',NULL,'$rutaArchivo','$fk_categoria','$precio','$cantidad','$valoracion','$estado','$cantidad_vendidos',NULL,'$id')";
 if ($conn->query($sql) === TRUE) {
  
 } else {

@@ -15,6 +15,7 @@ while($mostrar=mysqli_fetch_array($result)){
   $rol = $mostrar['ROL'];
   $correo = $mostrar['CORREO'];
   $imagen = $mostrar['IMAGEN'];
+  
 }
 
 if($rol == 1){
@@ -28,12 +29,30 @@ if($rol == 3){
 }
 
 
-
-
 $query2="SELECT ID_CATEGORIA, NOMBRE FROM categoria";
 $resultcat = mysqli_query($conn, $query2);
 if (!$resultcat) {
   echo "Error en la consulta: " . mysqli_error($conn);
+}
+
+$sql3 = "SELECT * FROM usuario WHERE CORREO = '$USER'";
+$result3 = mysqli_query($conn,$sql3);
+while($mostrar=mysqli_fetch_array($result3)){
+  $id = $mostrar['ID_USUARIO'];
+ 
+}
+
+
+
+$sql = "SELECT COUNT(*) as total FROM productos WHERE ID_USUARIO=$id";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+  // Recuperar el resultado de la consulta
+  $row = $result->fetch_assoc();
+  $totalRegistros = $row["total"];
+ 
+} else {
+  $totalRegistros =0;
 }
 
 
@@ -70,9 +89,9 @@ if (!$resultcat) {
           <p><?php echo $correo; ?></p>
 
           <ul class="about">
-            <li><span>6</span>Productos</li>
-            <li><span>30</span>Reseñas Positivas</li>
-            <li><span>2</span>Ordenes</li>
+            <li><span><?php echo $totalRegistros; ?></span>Productos</li>
+            <li><span>0</span>Reseñas Positivas</li>
+            <li><span>0</span>Ordenes</li>
           </ul>
 
           <div class="content">
@@ -98,18 +117,13 @@ if (!$resultcat) {
           <nav>
             <ul>
               <li><a href="">Productos</a></li>
-              <li><a href="">Reseñas</a></li>
+              <li><a href="">Lista</a></li>
             </ul>
             <button onclick="openModal()" >Crear Producto</button>
           </nav>
 
-          <div class="photos">
-            <img src="../Login_and_Register/Images/box.jpg" alt="Photo" />
-            <img src="../Login_and_Register/Images/box.jpg" alt="Photo" />
-            <img src="../Login_and_Register/Images/box.jpg" alt="Photo" />
-            <img src="../Login_and_Register/Images/box.jpg" alt="Photo" />
-            <img src="../Login_and_Register/Images/box.jpg" alt="Photo" />
-            <img src="../Login_and_Register/Images/box.jpg" alt="Photo" />
+          <div class="photos" id="photos">
+                    
           </div>
         </div>
       </div>
@@ -141,7 +155,7 @@ if (!$resultcat) {
         </form>
     </div>
 
-
+    <script src="../JAVASCRIPT/jquery.js"></script>
     <script src="../JAVASCRIPT/Crear_producto.js"></script>
   </body>
 </html>

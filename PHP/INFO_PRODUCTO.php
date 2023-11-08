@@ -18,7 +18,7 @@ echo "La solicitud no fue realizada por el método POST.";
 
 
 
-    $query = "SELECT NOMBRE, DESCRIPCION, PRECIO, VALORACION, CANTIDAD,FK_CATEGORIA FROM productos WHERE ID_PRODUCTO = '$id'";
+    $query = "SELECT NOMBRE, DESCRIPCION, PRECIO, VALORACION, CANTIDAD,FK_CATEGORIA, VIDEO FROM productos WHERE ID_PRODUCTO = '$id'";
     $result = mysqli_query($conn, $query);
     while($mostrar=mysqli_fetch_array($result)){
         $nombre = $mostrar['NOMBRE'];
@@ -27,23 +27,16 @@ echo "La solicitud no fue realizada por el método POST.";
         $valoracion = $mostrar['VALORACION'];
         $cantidad = $mostrar['CANTIDAD'];
         $categoria = $mostrar['FK_CATEGORIA'];
+        $video = $mostrar['VIDEO'];
       }
 
 
       $query2 = "SELECT NOMBRE FROM categoria WHERE ID_CATEGORIA = '$categoria'";
-      $result2 = mysqli_query($conn, $query);
+      $result2 = mysqli_query($conn, $query2);
       while($mostrar=mysqli_fetch_array($result2)){
           $nombrecat = $mostrar['NOMBRE'];
           
         }
-
-        /*
-      $query3 = "SELECT RUTA_IMAGEN FROM imagenes WHERE ID_PRODUCTO = '$id'";
-      $result3 = mysqli_query($conn, $query3);
-      while($mostrar=mysqli_fetch_array($result3)){
-          $imagen1 = $mostrar['RUTA_IMAGEN'];
-     
-        }*/
 
 
 ?>
@@ -126,6 +119,20 @@ echo "La solicitud no fue realizada por el método POST.";
     <p class="card-text">Cantidad: <?php echo $cantidad; ?></p>
     <p class="card-text"><small class="text-muted">Categoria: <?php echo $nombrecat; ?></small></p>
 </div>
+<div class="info-container">
+
+<p></p>
+</div>
+
+<div class="video-container">
+        <h2>Reproductor de Video</h2>
+        <div class="video">
+            <!-- Coloca aquí el código para incrustar tu video, como un iframe de YouTube o un elemento de video HTML -->
+            <?php echo '<iframe width="560" height="315" src="'.$video .'" frameborder="2" allowfullscreen></iframe>' ?>
+        </div>
+    </div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
