@@ -23,12 +23,21 @@ if(!empty($_POST["BTN_INGRESAR"])){
 
         if ($datos = $sql->fetch_assoc() ) {
 
-
-        
             session_start();
             $_SESSION['USER'] = $correo;
+
+            $sql3 = "SELECT * FROM usuario WHERE CORREO = '$correo'";
+            $result3 = mysqli_query($conn,$sql3);
+            while($mostrar=mysqli_fetch_array($result3)){
+              $rol = $mostrar['ROL'];
+              
+            }
+
+            if($rol==="1"){
+                header("location:../PHP/HOME_ADMIN.php");
+            }else{
             header("location:../HOME/pagInicio.html");
-            
+            }
 
         } else {
             echo "<script>alert('Usario No Encontrado');</script>";

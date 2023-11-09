@@ -107,6 +107,7 @@ if ($result->num_rows > 0) {
               <i class="fab fa-facebook"></i>
               <i class="fab fa-amazon"></i>
             </ul>          
+            <a href="../HOME/pagInicio.html">Home</a><br>
             <a href="../PHP/EDITAR_PERFIL.php">Editar</a><br>
             <a href="../PHP/CERRAR_SESSION.php">Cerrar Sesion</a>
            
@@ -120,6 +121,7 @@ if ($result->num_rows > 0) {
               <li><a href="">Lista</a></li>
             </ul>
             <button onclick="openModal()" >Crear Producto</button>
+            <button onclick="openModal2()" >Crear Lista</button>
           </nav>
 
           <div class="photos" id="photos">
@@ -154,6 +156,32 @@ if ($result->num_rows > 0) {
             <input class="btnenviar" name="submit" type="submit">
         </form>
     </div>
+
+
+
+
+    <div class="modal-overlay" id="modalOverlay2"></div>
+
+<div class="modal" id="myModal2">
+    <form action="../PHP/REGISTRAR_LISTA.php" method="post" enctype="multipart/form-data">>
+        <span class="close-button" onclick="closeModal2()">&times;</span>
+        <h2>Crear Lista</h2>
+        <input class="form-control me-2" type="text" placeholder="Nombre" name="nombrelist" required><br>
+        <input class="form-control me-2" type="text" placeholder="Descripcion" name="descripcionlist" required><br>
+        <div class="Privacidad">
+                    
+                    <input type="radio" id="privada" name="lista" value="Privada"  >
+                    <label for="priv">Privada</label>
+                    
+                    <input type="radio" id="publica" name="lista" value="Publica" checked>
+                    <label for="public">Publica</label>
+                </div>
+            
+        <input class="btnenviar" name="submit" type="submit" value="Crear">
+    </form>
+</div>
+
+
 
     <script src="../JAVASCRIPT/jquery.js"></script>
     <script src="../JAVASCRIPT/Crear_producto.js"></script>

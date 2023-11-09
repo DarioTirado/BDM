@@ -118,6 +118,7 @@ echo "La solicitud no fue realizada por el método POST.";
     <p class="card-text">Precio: <?php echo $precio; ?></p>
     <p class="card-text">Cantidad: <?php echo $cantidad; ?></p>
     <p class="card-text"><small class="text-muted">Categoria: <?php echo $nombrecat; ?></small></p>
+    <input class="btn btn-primary" type="submit" Value="Agregar A Mi Lista">
 </div>
 <div class="info-container">
 

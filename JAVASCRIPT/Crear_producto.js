@@ -9,6 +9,16 @@
         document.getElementById("myModal").style.display = "none";
     }
 
+    function openModal2() {
+      document.getElementById("modalOverlay2").style.display = "block";
+      document.getElementById("myModal2").style.display = "block";
+  }
+  
+  function closeModal2() {
+      document.getElementById("modalOverlay2").style.display = "none";
+      document.getElementById("myModal2").style.display = "none";
+  }
+
     document.addEventListener("DOMContentLoaded", function() {
     });   
 
@@ -54,10 +64,10 @@ $(document).ready(function () {
         html +=  `   <div class="card text-dark bg-info mb-3" style="max-width: 18rem;">`;
         html +=  `         <div class="card-header">`+ datacontact[i].NOMBRE +`</div>`;
         html +=  `             <div class="card-body">`;
-        html +=  `                   <form method="POST" action="../PHP/ACTUALIZAR_PRODUCTO.php" enctype="multipart/form-data">`;
+        html +=  `                   <form method="POST" action="../PHP/EDITAR_PRODUCTO.php" enctype="multipart/form-data">`;
         html +=  `                    <h5 name="nombre" class="card-title">`+ datacontact[i].DESCRIPCION +`</h5>`;
         html +=  `                    <input name="id" type="hidden" value="` + datacontact[i].ID_PRODUCTO + `">`;
-        html +=  `                    <input type="submit" class="btn btn-primary" value="Editar">`;
+        html +=  `                    <button class="btn btn-primary" >Editar</button>`;
         html +=  `                      </form>`;
         html +=  `                </div>`;
         html +=  `            </div>`;

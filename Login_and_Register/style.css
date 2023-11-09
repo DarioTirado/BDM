@@ -198,3 +198,30 @@ opacity: 0%;
     color:  rgb(127, 206, 255);
     
 }
+
+
+.select-style {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color:rgb(55, 108, 177);
+    border-radius: 5px;
+    padding: 8px 12px;
+    width: 200px; /* Ancho personalizado */
+    font-size: 16px; /* Tamaño de fuente personalizado */
+    color: #ffffff; /* Color de texto personalizado */
+  }
+  
+  /* Estilo para la flecha desplegable */
+  .select-style::after {
+    content: "\25BC"; /* Código de la flecha hacia abajo */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+  
+  /* Estilo para el hover del select */
+  .select-style:hover {
+    border-color: #007BFF; /* Color del borde al pasar el ratón */
+  }

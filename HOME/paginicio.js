@@ -119,7 +119,7 @@ $(document).ready(function () {
         html +=  `                    <p name="precio" class="card-text">Precio: ` + datacontact[i].PRECIO + `$</p>`;
         html +=  `                    <p name="descripcion" class="card-text">Descripcion: ` + datacontact[i].DESCRIPCION + `</p>`;
         html +=  `                    <input name="id" type="hidden" value="` + datacontact[i].ID_PRODUCTO + `">`;
-        html +=  `                    <input type="submit" class="btn btn-primary">`;
+        html +=  `                    <input type="submit" value="Ver Producto" class="btn btn-primary">`;
         html +=  `                    <a href="#" class="btn btn-primary">Agregar A Carrito</a>`;
         html +=  `                      </form>`;
         html +=  `                </div>`;
