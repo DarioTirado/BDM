@@ -1,79 +1,35 @@
-.articulos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .horizontal-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .card {
-    flex: 0 0 calc(50% - 10px); /* Controla el ancho de cada tarjeta (50% del ancho del contenedor con espacio entre ellas) */
-    margin: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-    max-width: 250px; /* Ajusta el ancho máximo de la tarjeta */
-
-  }
-  
-  .card-content {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra el contenido horizontalmente */
-  }
-  
-  .card-img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .card-title {
-    font-size: 18px;
-    margin: 10px 0; /* Añade espacio vertical entre el título y el texto */
-  }
-  
-  .card-text {
-    font-size: 14px;
-    margin: 10px 0; /* Añade espacio vertical entre el texto y el botón */
-  }
-  
-  .card-footer {
-    margin-top: 10px;
-  }
-  
-  .btn-primary {
-    background-color: #0074d9;
-    color: #fff;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  
-.titulo{
-    margin-bottom: 10px;
-    margin-left: 10px;
+/* Estilos para la sección de productos */
+#productos-container {
+  flex: 0 0 70%; /* Ajusta el ancho del contenedor de productos según tus necesidades */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.BTN_PAGAR {
-    text-align: center;
-    margin-top: 20px; /* Añade un espacio entre las tarjetas y el botón de Pagar */
-  }
+/* Estilos para la sección del carrito */
+#carrito-container {
+  flex: 0 0 30%; /* Ajusta el ancho del contenedor de carrito según tus necesidades */
+  padding: 20px;
+  box-sizing: border-box;
+  border: 2px solid #000000;
+  border-radius: 5px;
+}
+
+/* Estilos específicos para las tarjetas de productos */
+#productos-container .card {
+  width: 100%; /* Ajusta el ancho de las tarjetas al 100% del contenedor de productos */
+  margin-bottom: 10px; /* Ajusta el espacio entre las tarjetas */
+}
+
+/* Estilos específicos para las tarjetas del carrito */
+#carrito-container .card {
+  width: 100%; /* Ajusta el ancho de las tarjetas al 100% del contenedor de carrito */
+  margin-bottom: 10px; /* Ajusta el espacio entre las tarjetas */
   
-.BTN_PAGAR a {
-    border-radius: 10px;
-    background-color: #0074d9;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 18px;
-  }
-  
-  
-  
+}
+
+.custom-card-body {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

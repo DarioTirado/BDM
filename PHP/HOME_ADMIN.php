@@ -38,7 +38,7 @@
                             Consultas
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="../CARRITO_COMPRAS/Carrito.html">Carrito</a></li>
+                            <li><a class="dropdown-item" href="../PHP/CARRITO.PHP">Carrito</a></li>
                             <li><a class="dropdown-item" href="../CONSULTA_PEDIDOS/CONSULTA_PEDIDOS.html">Consulta De Pedidos</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="../CONSULTA_VENTAS/Consulta_ventas.html">Consulta De Ventas</a></li>

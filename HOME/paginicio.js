@@ -1,3 +1,5 @@
+let datacontact;
+
 document.addEventListener("DOMContentLoaded", function () {
     const popularProductsContainer = document.getElementById("productCarousel");
 
@@ -59,84 +61,99 @@ document.addEventListener("DOMContentLoaded", function () {
             return card;
         }
     }
+
+    $.ajax({
+        url: "../PHP/OBTENER_PRODUCTOS.php",
+        type: "POST",
+        async: true,
+        data: { action_c: "busquedatal" },
+        beforeSend: function () { },
+        success: function (response) {
+            if (response == "notData") {
+                alert("Ups! Aguarda Al futuro de la Educacion");
+            } else {
+                const info = JSON.parse(response);
+                datacontact = info;
+                jsonLength = datacontact.length;
+                for (let i = 0; i < jsonLength; i++) {
+                    var html = `
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <form method="POST" action="../PHP/INFO_PRODUCTO.php" enctype="multipart/form-data">
+                                        <h5 name="nombre" class="card-title">${datacontact[i].NOMBRE}</h5>
+                                        <p name="precio" class="card-text">Precio: ${datacontact[i].PRECIO}$</p>
+                                        <p name="descripcion" class="card-text">Descripcion: ${datacontact[i].DESCRIPCION}</p>
+                                        <input name="id" type="hidden" value="${datacontact[i].ID_PRODUCTO}">
+                                        <input type="submit" value="Ver Producto" class="btn btn-primary">
+                                        <a href="#" class="btn btn-primary" onclick="agregarAlCarrito(${i})">Agregar A Carrito</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>`;
+                    $("#list-container").append(html);
+                }
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
 });
 
+function agregarAlCarrito(index) {
+    const producto = datacontact[index];
 
-function openModal() {
-    document.getElementById("modalOverlay").style.display = "block";
-    document.getElementById("myModal").style.display = "block";
-}
+    // Verifica que el objeto producto tenga una propiedad ID_PRODUCTO
+    if (producto && producto.ID_PRODUCTO) {
+        // Enviar una solicitud POST al archivo Carrito.php con la información del producto
+        $.ajax({
+            url: "../PHP/Carrito.php",
+            type: "POST",
+            data: {
+                index: producto.ID_PRODUCTO,
+                idProducto: producto.ID_PRODUCTO,
+                nombre: producto.NOMBRE,
+                precio: producto.PRECIO
+            },
+            dataType: "json",
+            success: function (response) {
+                if (response.status === "success") {
+                    // Mostrar una alerta de éxito utilizando Swal
+                    Swal.fire({
+                        title: '¡Producto Agregado!',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    });
 
-function closeModal() {
-    document.getElementById("modalOverlay").style.display = "none";
-    document.getElementById("myModal").style.display = "none";
-}
+                    // Actualizar la información del carrito o realizar otras acciones necesarias
+                    // Puedes llamar a funciones adicionales aquí según tus necesidades
+                } else {
+                    // Mostrar una alerta de error si la respuesta no es exitosa
+                    Swal.fire({
+                        title: 'Error',
+                        text: response.message,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
 
-
-window.onload = function() {
-    // Verificar si hay un mensaje de éxito en la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const successMessage = urlParams.get('success_message');
-
-    if (successMessage) {
-        // Mostrar una alerta con el mensaje de éxito
-        alert(successMessage);
+                // Mostrar una alerta de error con el mensaje detallado
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error al agregar el producto al carrito.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            }
+        });
+    } else {
+        console.error("El objeto de producto no tiene un ID_PRODUCTO válido.");
     }
 }
-
-$(document).ready(function () {
-    //Display de la tabla
-    const action = "busquedatal";
-    var datacontact = "";
-    $.ajax({
-      url: "../PHP/OBTENER_PRODUCTOS.php",
-      type: "POST",
-      async: true,
-      data: {
-        action_c: action,
-      },
-      beforeSend: function () { },
-      success: function (response) {
-        //console.log(response);
-  
-        if (response == "notData") {
-          alert("Ups! Aguarda Al futuro de la Educacion");
-        } else {
-          const info = JSON.parse(response);
-          //console.log(info);
-          datacontact = info;
-          jsonLength = datacontact.length;
-          for (let i = 0; i < jsonLength; i++) {
-            var html = "";
-
-        
-    
-        html +=  `        <div class="col-md-4">`;
-        html +=  `            <div class="card mb-4">`;
-        html +=  `                <div class="card-body">`;
-        html +=  `                   <form method="POST" action="../PHP/INFO_PRODUCTO.php" enctype="multipart/form-data">`;
-        html +=  `                    <h5 name="nombre" class="card-title">`+ datacontact[i].NOMBRE +`</h5>`;
-        html +=  `                    <p name="precio" class="card-text">Precio: ` + datacontact[i].PRECIO + `$</p>`;
-        html +=  `                    <p name="descripcion" class="card-text">Descripcion: ` + datacontact[i].DESCRIPCION + `</p>`;
-        html +=  `                    <input name="id" type="hidden" value="` + datacontact[i].ID_PRODUCTO + `">`;
-        html +=  `                    <input type="submit" value="Ver Producto" class="btn btn-primary">`;
-        html +=  `                    <a href="#" class="btn btn-primary">Agregar A Carrito</a>`;
-        html +=  `                      </form>`;
-        html +=  `                </div>`;
-        html +=  `            </div>`;
-        html +=  `        </div>`;
-     
-        
-         
-            $("#list-container").append(html);
-          }
-  
-        }
-      },
-      error: function (error) {
-        console.log(error);
-      },
-    });
-  });
-
-

@@ -1,62 +1,38 @@
 <?php
 include("../PHP/CONEXION.php");
 
-if(!empty($_POST["BTN_INGRESAR"])){
-    if(empty($_POST["user"]) and empty($_POST["pass"])) {
-
-        echo"Campos Vacios";
-    }
-    else{
+if (!empty($_POST["BTN_INGRESAR"])) {
+    if (empty($_POST["user"]) || empty($_POST["pass"])) {
+        echo "Campos Vacíos";
+    } else {
         $usuario = $_POST["user"];
         $password = $_POST["pass"];
 
+        // Utilizar sentencia preparada para evitar inyección SQL
+        $stmt = $conn->prepare("SELECT * FROM usuario WHERE NOMBRE_USUARIO = ? AND CONTRASEÑA = ?");
+        $stmt->bind_param("ss", $usuario, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-
-
-        $sql = $conn->query("SELECT * FROM usuario WHERE NOMBRE_USUARIO = '$usuario' and CONTRASEÑA = '$password'");
-
-        $sql2 = "SELECT * FROM usuario WHERE NOMBRE_USUARIO = '$usuario'";
-        $result = mysqli_query($conn,$sql2);
-        while($mostrar=mysqli_fetch_array($result)){       
-          $correo = $mostrar['CORREO'];
-        }
-
-        if ($datos = $sql->fetch_assoc() ) {
+        if ($result->num_rows > 0) {
+            $datos = $result->fetch_assoc();
 
             session_start();
-            $_SESSION['USER'] = $correo;
+            $_SESSION['ID_USUARIO'] = $datos['ID_USUARIO']; // Agregamos el ID_USUARIO a la sesión
+            $_SESSION['USER'] = $datos['CORREO'];
 
-            $sql3 = "SELECT * FROM usuario WHERE CORREO = '$correo'";
-            $result3 = mysqli_query($conn,$sql3);
-            while($mostrar=mysqli_fetch_array($result3)){
-              $rol = $mostrar['ROL'];
-              
-            }
+            $rol = $datos['ROL'];
 
-            if($rol==="1"){
+            if ($rol === "1") {
                 header("location:../PHP/HOME_ADMIN.php");
-            }else{
-            header("location:../HOME/pagInicio.html");
+                exit;
+            } else {
+                header("location:../HOME/pagInicio.html");
+                exit;
             }
-
         } else {
-            echo "<script>alert('Usario No Encontrado');</script>";
-       
-
+            echo "<script>alert('Usuario No Encontrado');</script>";
         }
-        
-
-
     }
-
-
-
 }
-
-
-
-
-
-
-
 ?>
