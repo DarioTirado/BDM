@@ -19,6 +19,24 @@
       document.getElementById("myModal2").style.display = "none";
   }
 
+  function openModal3() {
+    document.getElementById("modalOverlay3").style.display = "block";
+    document.getElementById("myModal3").style.display = "block";
+}
+
+function closeModal3() {
+    document.getElementById("modalOverlay3").style.display = "none";
+    document.getElementById("myModal3").style.display = "none";
+}
+
+
+function esconderproductos() {
+ 
+  document.getElementById("mydiv").style.display = "none";
+
+}
+
+
     document.addEventListener("DOMContentLoaded", function() {
     });   
 
@@ -84,7 +102,71 @@ $(document).ready(function () {
         console.log(error);
       },
     });
+
+
+
+
+
+
+    const action2 = "busquedatal2";
+    var datacontact2 = "";
+    $.ajax({
+      url: "../PHP/OBTENER_LISTAS_PERFIL.php",
+      type: "POST",
+      async: true,
+      data: {
+        action_c2: action2,
+      },
+      beforeSend: function () { },
+      success: function (response2) {
+        //console.log(response);
+  
+        if (response2 == "notData") {
+          alert("Ups! Aguarda Al futuro de la Educacion");
+        } else {
+          const info2 = JSON.parse(response2);
+          //console.log(info);
+          datacontact2 = info2;
+          jsonLength2 = datacontact2.length;
+          for (let j = 0; j < jsonLength2; j++) {
+            var html2 = "";
+
+        
+
+        html2 +=  `               <form method="POST" action="../PHP/INFO_LISTA.php"`;
+        html2 +=  `            <div class="card">  `;
+        html2 +=  `           <div class="card-header">`;
+        html2 +=  `                 <div class="card-body">`;
+        html2 +=  `                      <h5 class="card-title" >` + datacontact2[j].NOMBRE_LISTA +` </h5>`;
+        html2 +=  `                   <p class="card-text ">` + datacontact2[j].DESCRIPCION +`</p>`;
+        html2 +=  `                    <input name="idlista" type="hidden" value="` + datacontact2[j].ID_LISTA + `">`;
+        html2 +=  `                    <input name="nombrelista" type="hidden" value="` + datacontact2[j].NOMBRE_LISTA + `">`;
+        html2 +=  `                    <input name="descripcionlista" type="hidden" value="` + datacontact2[j].DESCRIPCION + `">`;
+        html2 +=  `                    <input type="submit" class="btn btn-primary" value="Ver Contenido">`;
+        html2 +=  `                </div>`;
+        html2 +=  `            </div>`;
+        html2 +=  `            </form`;
+      
+     
+        
+         
+            $("#photos2").append(html2);
+          }
+  
+        }
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+
+
   });
+
+
+
+
+
 
 
 

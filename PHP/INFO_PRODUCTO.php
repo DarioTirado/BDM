@@ -1,6 +1,22 @@
 <?php
 include("CONEXION.php");
 
+session_start();
+$USER = $_SESSION['USER'];
+
+if($USER == null || $USER ==''){
+  header("location:../PHP/ERROR_AUTENTICACION.php");
+die();
+}
+
+$sql = "SELECT * FROM usuario WHERE CORREO = '$USER'";
+$resultU = mysqli_query($conn,$sql);
+while($mostrarU=mysqli_fetch_array($resultU)){
+    $idU =$mostrarU['ID_USUARIO'];
+  
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica que el formulario se haya enviado por POST
     if (isset($_POST["id"])) {
@@ -39,6 +55,14 @@ echo "La solicitud no fue realizada por el método POST.";
         }
 
 
+
+        $query3="SELECT * FROM lista WHERE ID_USUARIO='$idU'";
+        $resultlist = mysqli_query($conn, $query3);
+        if (!$resultlist) {
+          echo "Error en la consulta: " . mysqli_error($conn);
+        }
+        
+        
 ?>
 
 
@@ -111,6 +135,7 @@ echo "La solicitud no fue realizada por el método POST.";
         ?>
 </div>
 
+        <form action="../PHP/AGREGAR_A_LISTA.php" method="post">
   <div class="card-body">
     <h5 class="card-title"></h5>
     <p class="card-text">Descripcion De El Articulo: <?php echo $nombre; ?></p>
@@ -118,8 +143,21 @@ echo "La solicitud no fue realizada por el método POST.";
     <p class="card-text">Precio: <?php echo $precio; ?></p>
     <p class="card-text">Cantidad: <?php echo $cantidad; ?></p>
     <p class="card-text"><small class="text-muted">Categoria: <?php echo $nombrecat; ?></small></p>
+    <input type="hidden" name="idprod" value="<?php echo $id; ?>">
+
+
+    <label for="">Mis Listas</label>
+            <select class="select-style" name="my_select2">
+              <?php
+              while ($filalist = mysqli_fetch_assoc($resultlist))  {
+                echo '<option value="' . $filalist['ID_LISTA'] . '">' . $filalist['NOMBRE_LISTA'] . '</option>';
+              }
+                ?>    
+           </select>        
+
     <input class="btn btn-primary" type="submit" Value="Agregar A Mi Lista">
 </div>
+</form>
 <div class="info-container">
 
 <p></p>

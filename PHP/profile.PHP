@@ -118,15 +118,25 @@ if ($result->num_rows > 0) {
           <nav>
             <ul>
               <li><a href="">Productos</a></li>
-              <li><a href="">Lista</a></li>
             </ul>
             <button onclick="openModal()" >Crear Producto</button>
             <button onclick="openModal2()" >Crear Lista</button>
+            <button onclick="openModal3()" >Agregar Direccion</button>
           </nav>
 
           <div class="photos" id="photos">
                     
           </div>
+          <div class="right__col">
+          <nav>
+            <ul>
+              <li><a href="">Listas</a></li>
+            </ul>
+            </nav>
+            <div class="photos2" id="photos2">
+                    
+            </div>
+            </div>
         </div>
       </div>
     </div>
@@ -182,6 +192,21 @@ if ($result->num_rows > 0) {
 </div>
 
 
+<div class="modal-overlay" id="modalOverlay3"></div>
+
+<div class="modal" id="myModal3">
+    <form action="../PHP/REGISTRO_DIRECCION.php" method="post">
+        <span class="close-button" onclick="closeModal3()">&times;</span>
+        <h2>Direccion De Entrega</h2>
+        <input class="form-control me-2" type="text" placeholder="Direccion" name="nombredir" required><br>
+        <input class="form-control me-2" type="text" placeholder="Estado" name="Estado" required><br>
+        <input class="form-control me-2" type="text" placeholder="Ciudad" name="ciudad" required><br>
+        <input class="form-control me-2" type="text" placeholder="Pais" name="Pais" required><br>
+
+            
+        <input class="btnenviar" name="submit" type="submit" value="Guardar">
+    </form>
+</div>
 
     <script src="../JAVASCRIPT/jquery.js"></script>
     <script src="../JAVASCRIPT/Crear_producto.js"></script>

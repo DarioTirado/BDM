@@ -3,6 +3,12 @@ include("CONEXION.php");
 session_start();
 $USER = $_SESSION['USER'];
 
+
+if($USER == null || $USER ==''){
+    header("location:../PHP/ERROR_AUTENTICACION.php");
+  die();
+  }
+
 $consulta = "SELECT * FROM usuario WHERE CORREO = '$USER'";
 $resultado = mysqli_query($conn,$consulta);
 

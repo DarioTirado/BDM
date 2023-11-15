@@ -267,4 +267,7 @@ cursor: pointer;
   border-color: #007BFF; /* Color del borde al pasar el ratón */
 }
 
+.card{
 
+  background-color: rgb(146, 49, 122);
+}
