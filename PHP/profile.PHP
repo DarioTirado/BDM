@@ -56,6 +56,19 @@ if ($result->num_rows > 0) {
 }
 
 
+
+$sql = "SELECT COUNT(*) as total FROM lista WHERE ID_USUARIO=$id";
+$result2 = $conn->query($sql);
+if ($result2->num_rows > 0) {
+  // Recuperar el resultado de la consulta
+  $row = $result2->fetch_assoc();
+  $totalListas = $row["total"];
+ 
+} else {
+  $totalListas =0;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -90,8 +103,8 @@ if ($result->num_rows > 0) {
 
           <ul class="about">
             <li><span><?php echo $totalRegistros; ?></span>Productos</li>
+            <li><span><?php echo $totalListas; ?></span>Listas</li>
             <li><span>0</span>Reseñas Positivas</li>
-            <li><span>0</span>Ordenes</li>
           </ul>
 
           <div class="content">

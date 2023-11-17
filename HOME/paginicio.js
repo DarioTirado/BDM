@@ -1,3 +1,15 @@
+
+function openModal() {
+    document.getElementById("modalOverlay").style.display = "block";
+    document.getElementById("myModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("modalOverlay").style.display = "none";
+    document.getElementById("myModal").style.display = "none";
+}
+
+
 let datacontact;
 
 document.addEventListener("DOMContentLoaded", function () {

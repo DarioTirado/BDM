@@ -20,10 +20,10 @@ $directorioDestino = '../ZRECURSOS/IMAGENES';
 $rutaArchivo = $directorioDestino . '/' . $_FILES['image']['name'];
 move_uploaded_file($_FILES['image']['tmp_name'], $rutaArchivo);
 
+$ran_id = rand(time(), 100000000);
 
-
-$sql = "INSERT INTO usuario (CORREO, CONTRASEÑA , NOMBRE_USUARIO, NOMBRE_PERSONAL, FECHA_NACIMIENTO, SEXO, IMAGEN, ROL)
-VALUES ('$email','$password' ,'$username' , '$nombre', '$fecha_nacimiento', '$sexo','$rutaArchivo' ,$rol)";
+$sql = "INSERT INTO usuario (CORREO, CONTRASEÑA , NOMBRE_USUARIO, NOMBRE_PERSONAL, FECHA_NACIMIENTO, SEXO, IMAGEN, ROL, unique_id)
+VALUES ('$email','$password' ,'$username' , '$nombre', '$fecha_nacimiento', '$sexo','$rutaArchivo' ,$rol,'$ran_id')";
 
 if ($conn->query($sql) === TRUE) {
     header("location:../Login_and_Register/index.php");
