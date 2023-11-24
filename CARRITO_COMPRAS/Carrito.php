@@ -1,3 +1,40 @@
+<?php
+
+include("../PHP/CONEXION.php");
+session_start();
+$USER = $_SESSION['USER'];
+
+if($USER == null || $USER ==''){
+  header("location:../PHP/ERROR_AUTENTICACION.php");
+die();
+}
+
+
+$sql = "SELECT * FROM usuario WHERE CORREO = '$USER'";
+$result = mysqli_query($conn,$sql);
+while($mostrar=mysqli_fetch_array($result)){
+  $id = $mostrar['ID_USUARIO'];
+  
+  
+}
+
+$sql2 = "SELECT * FROM orden_compra2 WHERE ID_USUARIO = '$id'";
+$result2 = mysqli_query($conn,$sql2);
+while($mostrar2=mysqli_fetch_array($result2)){
+  $subtotal = $mostrar2['SUBTOTAL'];
+  $total = $mostrar2['TOTAL'];
+  
+}
+
+$query2="SELECT ID_METODO_PAGO, NOMBRE FROM METODO_PAGO";
+$resultcat = mysqli_query($conn, $query2);
+if (!$resultcat) {
+  echo "Error en la consulta: " . mysqli_error($conn);
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,6 +105,7 @@
         <div class="row">
             <div class="col-md-8">
                 <!-- Contenido relacionado con productos (eliminado según tu solicitud) -->
+                <form action="LLENAR_HISTORIAL.php" method="POST">
                 <h1 class="titulo">Carrito</h1>
                 <div id="carrito-container" class="articulos">
                     <!-- Aquí se mostrarán los productos del carrito -->
@@ -77,11 +115,25 @@
               <h1 class="titulo">Cuenta</h1>
                 <div class="d-flex justify-content-between align-items-center BTN_PAGAR">
                    <!-- Añadir esto donde desees mostrar el total a pagar -->
-<div>Total a Pagar: <span id="total-pagar">$0.00</span></div>
-
+                   <div >
+                    <h1 class="titulo" >Total a Pagar: <?php echo $total; ?></h1>
+                    
+                    <br><select class="select-style" name="my_select2">
+              <?php
+              while ($filacat = mysqli_fetch_assoc($resultcat))  {
+                echo '<option value="' . $filacat['ID_METODO_PAGO'] . '">' . $filacat['NOMBRE'] . '</option>';
+              }
+                ?>    
+           </select>     
+                
+                </div>
                     
                 </div>
-                <button class="btn btn-primary">Pagar</button>
+                <input type="submit" class="btn btn-primary" value="Pagar"></input>
+                </form>
+                <form action="LIMPIAR_CARRITO.php" method="POST">
+                <input type="submit" class="btn btn-primary" value="Limpiar"></input>
+                </form>
             </div>
         </div>
     </div>
