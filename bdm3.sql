@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2023 a las 07:19:26
+-- Tiempo de generación: 24-11-2023 a las 19:25:15
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -97,6 +97,15 @@ CREATE TABLE `factura` (
   `ID_ORDEN_COMPRA` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `factura`
+--
+
+INSERT INTO `factura` (`ID_FACTURA`, `PRECIO_SUBTOTAL`, `PRECIO_TOTAL`, `FECHA`, `ID_METODO_PAGO`, `ID_USUARIO`, `ID_ORDEN_COMPRA`) VALUES
+(12, 1352.65, 1352.65, '2023-11-23', 1, 4, 669150726),
+(13, 241.15, 241.15, '2023-11-23', 1, 23, 119160298),
+(14, 566, 566, '2023-11-23', 2, 23, 1035994501);
+
 -- --------------------------------------------------------
 
 --
@@ -128,7 +137,10 @@ INSERT INTO `imagenes` (`ID_IMAGENES`, `RUTA_IMAGEN`, `ID_PRODUCTO`) VALUES
 (12, '../ZRECURSOS/IMAGENES_PRODUCTOS/logo.png', 24),
 (13, '../ZRECURSOS/IMAGENES_PRODUCTOS/brazos - copia.png', 25),
 (14, '../ZRECURSOS/IMAGENES_PRODUCTOS/2.jpg', 25),
-(15, '../ZRECURSOS/IMAGENES_PRODUCTOS/1.jpg', 25);
+(15, '../ZRECURSOS/IMAGENES_PRODUCTOS/1.jpg', 25),
+(16, '../ZRECURSOS/IMAGENES_PRODUCTOS/_bdf9839b-7145-4e84-a4c6-f4423d1ea627.jpg', 26),
+(17, '../ZRECURSOS/IMAGENES_PRODUCTOS/_741a64e4-ee96-46aa-a9b1-abecb1958866.jpg', 26),
+(18, '../ZRECURSOS/IMAGENES_PRODUCTOS/_89818c24-bf12-47bc-8a68-30d03a220ae2.jpg', 26);
 
 -- --------------------------------------------------------
 
@@ -150,7 +162,8 @@ CREATE TABLE `lista` (
 
 INSERT INTO `lista` (`ID_LISTA`, `NOMBRE_LISTA`, `DESCRIPCION`, `ESTADO`, `ID_USUARIO`) VALUES
 (1, 'Mis favoritos', 'primera lista', 0, 4),
-(2, 'Compras De Navidad', 'lista para artículos navideños', 0, 4);
+(2, 'Compras De Navidad', 'lista para artículos navideños', 0, 4),
+(3, 'Lista De Regalos Para MI', 'mir regalos para navidad', 0, 23);
 
 -- --------------------------------------------------------
 
@@ -171,7 +184,9 @@ CREATE TABLE `lista_foranea` (
 INSERT INTO `lista_foranea` (`ID_LISTA_FORANEA`, `ID_LISTA`, `ID_PRODUCTO`) VALUES
 (13, 1, 25),
 (14, 1, 1),
-(15, 2, 23);
+(15, 2, 23),
+(16, 3, 1),
+(17, 3, 25);
 
 -- --------------------------------------------------------
 
@@ -196,8 +211,6 @@ INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`) V
 (3, 1086677698, 1086677677, 'bien y tu?'),
 (4, 1086677698, 1086677677, 'juas juas'),
 (5, 1086677677, 1086677698, 'mensaje2'),
-(6, 1086677677, 1086677698, 'puto'),
-(7, 1086677698, 1086677677, 'puto tu'),
 (8, 1086677677, 1490565474, 'Hola como estas, aun esta disponible?..'),
 (9, 1490565474, 1086677677, 'que articulo en especifico?..'),
 (10, 1086677677, 1490565474, 'uno equiss'),
@@ -214,6 +227,15 @@ CREATE TABLE `metodo_pago` (
   `NOMBRE` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `metodo_pago`
+--
+
+INSERT INTO `metodo_pago` (`ID_METODO_PAGO`, `NOMBRE`) VALUES
+(1, 'TARJETA DE CREDITO'),
+(2, 'TARJETA DE DEBITO'),
+(3, 'TRANSFERENCIA');
+
 -- --------------------------------------------------------
 
 --
@@ -222,10 +244,22 @@ CREATE TABLE `metodo_pago` (
 
 CREATE TABLE `orden_compra` (
   `ID_ORDEN_COMPRA` int(11) NOT NULL,
+  `ID_USUARIO` int(11) NOT NULL,
+  `PRODUCTOS` varchar(255) NOT NULL,
   `SUBTOTAL` float NOT NULL,
   `TOTAL` float NOT NULL,
-  `ID_CARRITO` int(11) NOT NULL
+  `ESTADO` varchar(255) NOT NULL,
+  `RANID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `orden_compra`
+--
+
+INSERT INTO `orden_compra` (`ID_ORDEN_COMPRA`, `ID_USUARIO`, `PRODUCTOS`, `SUBTOTAL`, `TOTAL`, `ESTADO`, `RANID`) VALUES
+(15, 4, '[{\"ID_PRODUCTO\":\"25\",\"NOMBRE\":\"juguete\",\"PRECIO\":\"200.15\"},{\"ID_PRODUCTO\":\"1\",\"NOMBRE\":\"papas\",\"PRECIO\":\"20.5\"},{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"},{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"}]', 1352.65, 1352.65, 'COMPLETADA', 669150726),
+(16, 23, '[{\"ID_PRODUCTO\":\"25\",\"NOMBRE\":\"juguete\",\"PRECIO\":\"200.15\"},{\"ID_PRODUCTO\":\"1\",\"NOMBRE\":\"papas\",\"PRECIO\":\"20.5\"},{\"ID_PRODUCTO\":\"1\",\"NOMBRE\":\"papas\",\"PRECIO\":\"20.5\"}]', 241.15, 241.15, 'COMPLETADA', 119160298),
+(17, 23, '[{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"}]', 566, 566, 'COMPLETADA', 1035994501);
 
 -- --------------------------------------------------------
 
@@ -236,7 +270,7 @@ CREATE TABLE `orden_compra` (
 CREATE TABLE `orden_compra2` (
   `ID_ORDEN_COMPRA` int(11) NOT NULL,
   `ID_USUARIO` int(11) NOT NULL,
-  `PRODUCTOS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`PRODUCTOS`)),
+  `PRODUCTOS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `SUBTOTAL` float NOT NULL,
   `TOTAL` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -250,7 +284,9 @@ INSERT INTO `orden_compra2` (`ID_ORDEN_COMPRA`, `ID_USUARIO`, `PRODUCTOS`, `SUBT
 (2, 20, '[{\"ID_PRODUCTO\":\"1\",\"NOMBRE\":\"papas\",\"PRECIO\":\"20.5\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"22\",\"NOMBRE\":\"adas\",\"PRECIO\":\"12\"},{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"},{\"ID_PRODUCTO\":\"22\",\"NOMBRE\":\"adas\",\"PRECIO\":\"12\"},{\"ID_PRODUCTO\":\"20\",\"NOMBRE\":\"nuevo2\",\"PRECIO\":\"20.5\"},{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"},{\"ID_PRODUCTO\":\"22\",\"NOMBRE\":\"adas\",\"PRECIO\":\"12\"}]', 8809, 8809),
 (3, 21, '[{\"ID_PRODUCTO\":\"1\",\"NOMBRE\":\"papas\",\"PRECIO\":\"20.5\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"22\",\"NOMBRE\":\"adas\",\"PRECIO\":\"12\"},{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"},{\"ID_PRODUCTO\":\"22\",\"NOMBRE\":\"adas\",\"PRECIO\":\"12\"},{\"ID_PRODUCTO\":\"20\",\"NOMBRE\":\"nuevo2\",\"PRECIO\":\"20.5\"},{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"},{\"ID_PRODUCTO\":\"22\",\"NOMBRE\":\"adas\",\"PRECIO\":\"12\"}]', 8809, 8809),
 (4, 22, '[{\"ID_PRODUCTO\":\"1\",\"NOMBRE\":\"papas\",\"PRECIO\":\"20.5\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"24\",\"NOMBRE\":\"asadsad\",\"PRECIO\":\"1900\"},{\"ID_PRODUCTO\":\"22\",\"NOMBRE\":\"adas\",\"PRECIO\":\"12\"},{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"},{\"ID_PRODUCTO\":\"22\",\"NOMBRE\":\"adas\",\"PRECIO\":\"12\"},{\"ID_PRODUCTO\":\"20\",\"NOMBRE\":\"nuevo2\",\"PRECIO\":\"20.5\"},{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"},{\"ID_PRODUCTO\":\"22\",\"NOMBRE\":\"adas\",\"PRECIO\":\"12\"}]', 8809, 8809),
-(5, 4, '[{\"ID_PRODUCTO\":\"25\",\"NOMBRE\":\"juguete\",\"PRECIO\":\"200.15\"},{\"ID_PRODUCTO\":\"1\",\"NOMBRE\":\"papas\",\"PRECIO\":\"20.5\"},{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"}]', 786.65, 786.65);
+(5, 4, '[{\"ID_PRODUCTO\":\"25\",\"NOMBRE\":\"juguete\",\"PRECIO\":\"200.15\"}]', 200.15, 200.15),
+(6, 26, '[{\"ID_PRODUCTO\":\"26\",\"NOMBRE\":\"Consola de videojuegos\",\"PRECIO\":\"1000\"}]', 1000, 1000),
+(7, 23, '[{\"ID_PRODUCTO\":\"21\",\"NOMBRE\":\"pp\",\"PRECIO\":\"566\"}]', 566, 566);
 
 -- --------------------------------------------------------
 
@@ -279,14 +315,15 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`ID_PRODUCTO`, `NOMBRE`, `DESCRIPCION`, `FK_IMAGENES`, `VIDEO`, `FK_CATEGORIA`, `PRECIO`, `CANTIDAD`, `VALORACION`, `ESTADO`, `CANTIDAD_VENDIDOS`, `FK_COMENTARIOS`, `ID_USUARIO`) VALUES
-(1, 'papas', 'bolsa de papas chidas las mas chidas ', NULL, '', 1, 20.5, 100, 'SIN VALORACION', 1, 0, NULL, 1),
+(1, 'papas', 'bolsa de papas chidas las mas chidas ', NULL, '', 1, 20.5, 97, 'SIN VALORACION', 1, 3, NULL, 1),
 (19, 'nuevo', 'nuevo', NULL, '', 1, 20.5, 100, 'SIN VALORACION', 1, 0, NULL, 16),
 (20, 'nuevo2', 'Producto nuevo2 para navidad', NULL, '', 3, 20.5, 100, 'SIN VALORACION', 1, 0, NULL, 16),
-(21, 'pp', 'pppppp descripcion generica', NULL, '', 4, 566, 100, 'SIN VALORACION', 1, 0, NULL, 4),
+(21, 'pp', 'pppppp descripcion generica', NULL, '', 4, 566, 97, 'SIN VALORACION', 1, 3, NULL, 4),
 (22, 'adas', 'asdasd', NULL, '', 1, 12, 1, 'SIN VALORACION', 1, 0, NULL, 17),
 (23, 'adas', 'asdasd', NULL, '', 1, 12, 1, 'SIN VALORACION', 1, 0, NULL, 17),
 (24, 'asadsad', 'asdasdaasd', NULL, '', 1, 1900, 14, 'SIN VALORACION', 0, 0, NULL, 17),
-(25, 'juguete', 'juguete novedoso para navidad', NULL, '../ZRECURSOS/VIDEOS/2023-10-03 20-01-27.mp4', 3, 200.15, 100, 'SIN VALORACION', 1, 0, NULL, 4);
+(25, 'juguete', 'juguete novedoso para navidad', NULL, '../ZRECURSOS/VIDEOS/2023-10-03 20-01-27.mp4', 3, 200.15, 98, 'SIN VALORACION', 1, 2, NULL, 4),
+(26, 'Consola de videojuegos', ' consola para jugar', NULL, '../ZRECURSOS/VIDEOS/2023-09-05 19-13-39.mp4', 3, 1000, 50, 'SIN VALORACION', 0, 0, NULL, 23);
 
 -- --------------------------------------------------------
 
@@ -338,7 +375,9 @@ INSERT INTO `usuario` (`ID_USUARIO`, `unique_id`, `CORREO`, `CONTRASEÑA`, `NOMB
 (17, 1111667767, 'carlosrayado2013@gmail.com', 'Carlos123!', 'carlos', 'Carlos Valdes', '2023-11-25', 'masculino', '../ZRECURSOS/IMAGENES/PicsArt_05-14-10.06.34.png', 1),
 (20, 108667123, 'carlos2@gmail.com', 'Neymar123!', 'Neymar1', 'neymar', '2023-11-18', 'masculino', '../ZRECURSOS/IMAGENES/logo.png', 2),
 (23, 1086677698, 'pedro2@gmail.com', 'Pedro123@', 'pedro2', 'pedro2', '2023-10-29', 'masculino', '../ZRECURSOS/IMAGENES/_cabc804b-20e9-4863-9221-0948d6879d81.jpg', 3),
-(24, 1490565474, 'ceci@gmail.com', 'Cecilia123@', 'Ceci23', 'Cecilia', '2023-10-29', 'femenino', '../ZRECURSOS/IMAGENES/_37d34583-8f26-4ff9-bf28-8c0b4e543a77.jpg', 2);
+(24, 1490565474, 'ceci@gmail.com', 'Cecilia123@', 'Ceci23', 'Cecilia', '2023-10-29', 'femenino', '../ZRECURSOS/IMAGENES/_37d34583-8f26-4ff9-bf28-8c0b4e543a77.jpg', 2),
+(25, 887471635, 'mari@gmail.com', 'Maria123@', 'marmar', 'maria', '2023-10-29', 'femenino', '../ZRECURSOS/IMAGENES/_dfb2a57f-a373-4571-ac7f-56141a4fca68.jpg', 2),
+(26, 1560971803, 'Pepeperez@gmail.com', 'Pepezzzz123@', 'PEPE123', 'pepe perezzz', '2023-10-29', 'masculino', '../ZRECURSOS/IMAGENES/pngtree-landscapes-wallpaper-images-picture-image_3021437.jpg', 2);
 
 --
 -- Índices para tablas volcadas
@@ -372,8 +411,7 @@ ALTER TABLE `direccion_usuario`
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`ID_FACTURA`),
   ADD KEY `FACTURA_METODO_P` (`ID_METODO_PAGO`),
-  ADD KEY `FACTURA_USUARIO` (`ID_USUARIO`),
-  ADD KEY `FACTURAORD_COMPRA` (`ID_ORDEN_COMPRA`);
+  ADD KEY `FACTURA_USUARIO` (`ID_USUARIO`);
 
 --
 -- Indices de la tabla `imagenes`
@@ -413,8 +451,7 @@ ALTER TABLE `metodo_pago`
 -- Indices de la tabla `orden_compra`
 --
 ALTER TABLE `orden_compra`
-  ADD PRIMARY KEY (`ID_ORDEN_COMPRA`),
-  ADD KEY `ORDEN_CARRITO` (`ID_CARRITO`);
+  ADD PRIMARY KEY (`ID_ORDEN_COMPRA`);
 
 --
 -- Indices de la tabla `orden_compra2`
@@ -469,25 +506,25 @@ ALTER TABLE `direccion_usuario`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `ID_FACTURA` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_FACTURA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `ID_IMAGENES` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID_IMAGENES` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `lista`
 --
 ALTER TABLE `lista`
-  MODIFY `ID_LISTA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_LISTA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `lista_foranea`
 --
 ALTER TABLE `lista_foranea`
-  MODIFY `ID_LISTA_FORANEA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID_LISTA_FORANEA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `messages`
@@ -499,25 +536,25 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT de la tabla `metodo_pago`
 --
 ALTER TABLE `metodo_pago`
-  MODIFY `ID_METODO_PAGO` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_METODO_PAGO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `orden_compra`
 --
 ALTER TABLE `orden_compra`
-  MODIFY `ID_ORDEN_COMPRA` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_ORDEN_COMPRA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `orden_compra2`
 --
 ALTER TABLE `orden_compra2`
-  MODIFY `ID_ORDEN_COMPRA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_ORDEN_COMPRA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `ID_PRODUCTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `ID_PRODUCTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `rol_usuario`
@@ -529,7 +566,7 @@ ALTER TABLE `rol_usuario`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Restricciones para tablas volcadas
@@ -558,7 +595,6 @@ ALTER TABLE `direccion_usuario`
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD CONSTRAINT `FACTURAORD_COMPRA` FOREIGN KEY (`ID_ORDEN_COMPRA`) REFERENCES `orden_compra` (`ID_ORDEN_COMPRA`),
   ADD CONSTRAINT `FACTURA_METODO_P` FOREIGN KEY (`ID_METODO_PAGO`) REFERENCES `metodo_pago` (`ID_METODO_PAGO`),
   ADD CONSTRAINT `FACTURA_USUARIO` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`);
 
@@ -580,12 +616,6 @@ ALTER TABLE `lista`
 ALTER TABLE `lista_foranea`
   ADD CONSTRAINT `FORANEA_LISTA` FOREIGN KEY (`ID_LISTA`) REFERENCES `lista` (`ID_LISTA`),
   ADD CONSTRAINT `FORANEA_PRODUCTO` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `productos` (`ID_PRODUCTO`);
-
---
--- Filtros para la tabla `orden_compra`
---
-ALTER TABLE `orden_compra`
-  ADD CONSTRAINT `ORDEN_CARRITO` FOREIGN KEY (`ID_CARRITO`) REFERENCES `carrito` (`ID_CARRITO`);
 
 --
 -- Filtros para la tabla `productos`
